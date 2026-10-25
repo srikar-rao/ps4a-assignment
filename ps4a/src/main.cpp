@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
             const sf::Time elapsed = clock.getElapsedTime();
             player.tween(elapsed);
-            window.clear(sf::Color(1, 1, 1, 1));
+            window.clear(sf::Color::Black);
             window.draw(player);
             window.display();
         }
