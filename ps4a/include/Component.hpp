@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #pragma once
 
 #include <memory>
@@ -15,7 +17,7 @@ namespace AP {
 
 class Component : public sf::Drawable {
  public:
-    virtual ~Component() override = default;
+    ~Component() override = default;
 
     virtual void tween(sf::Time time);
     static std::unique_ptr<Component> fromJson(const Json& data);
@@ -23,7 +25,7 @@ class Component : public sf::Drawable {
  protected:
     explicit Component(const Json& data);
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override = 0;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override = 0;
 
     KeyFrame currFrame() const;
     sf::Color color() const;

@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #include <iostream>
 #include <stdexcept>
 #include <string>

@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #include "Component.hpp"
 
 #include <algorithm>
@@ -35,7 +37,11 @@ sf::Color parseColor(const std::string& color_text) {
             const auto g = std::stoul(hex.substr(2, 2), nullptr, 16);
             const auto b = std::stoul(hex.substr(4, 2), nullptr, 16);
             const auto a = std::stoul(hex.substr(6, 2), nullptr, 16);
-            return sf::Color(static_cast<unsigned char>(r), static_cast<unsigned char>(g), static_cast<unsigned char>(b), static_cast<unsigned char>(a));
+            return sf::Color(
+                static_cast<unsigned char>(r),
+                static_cast<unsigned char>(g),
+                static_cast<unsigned char>(b),
+                static_cast<unsigned char>(a));
         }
     }
 
@@ -214,7 +220,10 @@ ImageComponent::ImageComponent(const Json& data)
 void ImageComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     sf::Sprite sprite(*texture_);
     const auto size = texture_->getSize();
-    sprite.setOrigin({static_cast<float>(size.x) / 2.0f, static_cast<float>(size.y) / 2.0f});
+    sprite.setOrigin({
+        static_cast<float>(size.x) / 2.0f,
+        static_cast<float>(size.y) / 2.0f,
+    });
     sprite.setColor(color());
 
     sf::Transform local;

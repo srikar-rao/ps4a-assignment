@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #include "AniPlayer.hpp"
 
 #include <fstream>

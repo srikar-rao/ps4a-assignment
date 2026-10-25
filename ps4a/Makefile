@@ -13,7 +13,10 @@ $(TARGET): $(SRC)
 run: $(TARGET)
 	./$(TARGET) $(ARGS)
 
+lint:
+	cpplint --extensions=cpp,hpp src/*.cpp include/*.hpp
+
 clean:
 	rm -f $(TARGET)
 
-.PHONY: all run clean
+.PHONY: all run lint clean

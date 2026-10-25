@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #pragma once
 
 #include <nlohmann/json.hpp>

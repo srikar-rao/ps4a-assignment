@@ -1,3 +1,5 @@
+// Copyright 2026 AniPlayer project authors.
+
 #include "KeyFrame.hpp"
 
 #include <algorithm>
@@ -27,7 +29,9 @@ KeyFrame KeyFrame::tween(KeyFrame alt, sf::Time t) const {
         return alt;
     }
 
-    const float elapsed = std::max(0.0f, std::min(t.asSeconds(), static_cast<float>(std::abs(delta_t))));
+    const float elapsed = std::max(
+        0.0f,
+        std::min(t.asSeconds(), static_cast<float>(std::abs(delta_t))));
     const float ratio = delta_t > 0.0f ? elapsed / delta_t : 1.0f;
 
     KeyFrame result;
