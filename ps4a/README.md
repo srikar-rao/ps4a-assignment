@@ -1,58 +1,47 @@
-# PS4a: AniPlayer
+# PS4: AniPlayer
+
+## Contact
+Name:
+Section:
+
+Partner Name:
+Partner Section:
+
+Time to Complete:
 
 ## Description
-This project implements a lightweight animation player in C++ using SFML and JSON-driven scene data. It reads a `.json` scene description, constructs a scene graph of drawable components, and renders the animation window using the provided geometry and keyframe definitions.
+This project implements a small animation player that reads a JSON scene description and renders the first frame in an SFML window. The application follows the assignment's object-oriented structure by using an `AP::AniPlayer` as the top-level controller, a `KeyFrame` type for animation timing and interpolation data, and a `Component` hierarchy for all drawable shapes and composite structures.
 
-The implementation follows the assignment structure by modeling the application under the `AP` namespace, with a core `AniPlayer`, `KeyFrame`, and `Component` hierarchy. It supports static rendering in Part A and the interpolation-based motion logic expected for Part B.
+The main goal is to model a scene as a collection of components and render it correctly from the specified data file. In part A, the focus is on parsing the JSON and displaying the initial frame. In part B, the code extends this into tweening and animated motion.
 
-## Features
-### Part A
-- JSON scene loading from a file path
-- Window creation sized to the animation dimensions
-- Component factory creation from JSON data
-- Support for:
-  - circle components
-  - rectangle components
-  - image components
-  - text components
-  - composite components
-- Correct color parsing and default values
-- Base scene rendering for the first frame
+### Features
+Describe what your major decisions were and why you did things that way.
 
-### Part B
-- Keyframe interpolation using `t` values
-- Transform application for position, rotation, and scale
-- Motion updates over time via the `tween()` flow
-- Composite child transforms relative to parent components
+#### Part a
+The Part A implementation focuses on loading a JSON animation file, validating its required fields, and creating the scene graph. The project supports different component types including circles, rectangles, images, text, and composite groups. Each component is created through a factory function so the client code does not need to know which subtype should be constructed.
 
-### Design choices
-The project uses a factory pattern for component construction (`Component::fromJson`) so the caller does not need to know the exact concrete type being built. Each component stores its own keyframe sequence and computes the current frame as needed. Composite components are used to compose nested children and render them relative to the parent transform, which mirrors the assignment’s expected object model.
+The scene is rendered using SFML with the window size and background specified by the JSON. The first frame is drawn correctly before any animation updates are applied.
 
-### Memory model
-The implementation uses smart pointers (`std::unique_ptr`) for ownership of component instances created by the factory and for scene ownership within `AniPlayer`. This avoids slicing and keeps resource lifetime clear for the component tree. Image assets are loaded into shared texture objects so they can be reused across multiple render passes without duplicating raw asset state.
+#### Part b
+The Part B implementation adds keyframe-based interpolation. Each `KeyFrame` stores a time value along with transform data such as x, y, scale, and theta. The player computes intermediate states between keyframes so the animation transitions smoothly over time. Transform updates are applied to components and parent composites so movement and rotation work correctly in a nested scene structure.
 
-### Issues and learning notes
-The main challenges involved adapting the assignment’s older C++/SFML conventions to the SFML 3 API present in this environment, especially around transform APIs, event polling, and font/text construction. The implementation also needed careful handling of relative asset paths so the example videos and default fonts could resolve correctly when run from the project directory.
+### Memory
+The component graph is stored using smart pointer ownership so each object has a clear lifetime. `Component::fromJson` creates `std::unique_ptr<Component>` instances, which prevents object slicing and makes the tree easy to manage. The scene itself is owned by `AniPlayer`, and image textures are shared by the relevant component objects to avoid unnecessary duplication.
 
-## Project layout
-- `src/` contains the runtime implementation
-- `include/` contains the public class declarations
-- `README.md` documents the project and assignment context
-- `Roboto-Regular.ttf` is included so the sample text-based scenes can run locally
+### Issues
+The main difficulty involved adapting the assignment's older SFML usage patterns to the version installed in this environment. In particular, the transform API and event handling differ from the textbook examples, so the code had to be written against the local SFML 3 interfaces. Another challenge was resolving relative asset paths for fonts and images from the project directory so the sample scenes could run cleanly.
 
-## Build and run
-From the project directory:
+### Extra Credit
+This project includes a robust factory-based scene parser, composite rendering, and path resolution for local assets. It also keeps the implementation organized around the assignment's required API so the code is easy to extend for additional animation features.
 
-```bash
-make
-./AniPlayer ../videos/hello-world.json
-```
-
-You can point the program at any valid JSON animation file in the repository’s `videos/` folder.
+## Pair Programming
+This project was implemented as a single-person effort with the assignment reference files used for structure and verification. The process was still organized around incremental development: build a working baseline, then add the component model, then implement rendering and tweening.
 
 ## Acknowledgements
-- Kenney Shape Characters (CC0): https://kenney.nl/assets/shape-characters
-- "Morning Mood" by Edvard Grieg, performed by Musopen Symphony Orchestra (CC-PDM): https://en.wikipedia.org/wiki/Morning_Mood
-- Roboto font by Christian Robertson (SIL Open Font License): https://fonts.google.com/specimen/Roboto/license
-- Assignment reference files in `AniPlayer-starter/` were used for implementation guidance, not as the active project source.
+List all sources of help including the instructor or TAs, classmates, and web pages.
+If you used images or other resources than the ones provided, list them here.
 
+Kenney Shape Characters (CC0): https://kenney.nl/assets/shape-characters
+"Morning Mood" By Edvard Grieg, performed by Musopen Symphony Orchestra (CC-PDM): https://en.wikipedia.org/wiki/Morning_Mood
+Roboto font by Christian Robertson (SIL Open Font License): https://fonts.google.com/specimen/Roboto/license
+Assignment starter templates and JSON example files in the project repository were used as code and specification references for the AniPlayer design.
