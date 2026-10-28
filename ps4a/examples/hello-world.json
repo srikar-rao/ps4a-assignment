@@ -1,0 +1,12 @@
+{
+  "width": 400,
+  "height": 300,
+  "scene": {
+    "shape": "text",
+    "font": "Roboto-Regular.ttf",
+    "text": "AniPlayer is running!",
+    "keyframes": [
+      {"t": 0, "x": 20, "y": 120}
+    ]
+  }
+}

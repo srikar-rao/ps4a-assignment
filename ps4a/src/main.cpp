@@ -9,7 +9,7 @@
 #include "AniPlayer.hpp"
 
 int main(int argc, char** argv) {
-    std::string input_path = argc > 1 ? argv[1] : "../videos/hello-world.json";
+    std::string input_path = argc > 1 ? argv[1] : "examples/hello-world.json";
 
     try {
         AP::AniPlayer player(input_path);

@@ -1,0 +1,5 @@
+**/.DS_Store
+**/build/
+**/cmake-build-*/
+/ps4a/AniPlayer
+/ps4a/AniPlayer.exe

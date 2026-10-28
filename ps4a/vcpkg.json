@@ -1,0 +1,8 @@
+{
+  "name": "ps4a-aniplayer",
+  "version-string": "1.0.0",
+  "dependencies": [
+    "sfml",
+    "nlohmann-json"
+  ]
+}
